@@ -10,25 +10,25 @@ import Foundation
 
 class Location {
     
-    let name: String
-    let latitude: Float
-    let longitude: Float
-    var trivia: [Trivium]
+    let name: String //The name of the place is a constant
+    let latitude: Float //Constant latitude
+    let longitude: Float //Constant longitude
+    var trivia: [Trivium] //An array of type Trivium (which we created that class!)
     
-    init (name: String, latitude: Float, longitude: Float, trivia: [Trivium] = []) {
-        self.name = name
-        self.latitude = latitude
-        self.longitude = longitude
-        self.trivia = trivia
+    init (name: String, latitude: Float, longitude: Float, trivia: [Trivium] = []) { //The default initializer where all values are instantiated at once.
+        self.name = name //set the class' name property equal to the name that was just given.
+        self.latitude = latitude //same for the lat
+        self.longitude = longitude //same for lon
+        self.trivia = trivia // same for trivia
     }
     
-    convenience init() {
+    convenience init() { //If created with no input it will use the default initializer (as seen below) with those given attributes.
         self.init(name: "", latitude: 0.0 , longitude: 0.0)
     }
     
     func stringByTruncatingNameToLength(_ length: Int) -> String {
         if length > self.name.characters.count {return self.name}
-        return String(self.name.characters.dropLast(self.name.characters.count - length))
+        return String(self.name.characters.dropLast(self.name.characters.count - length)) //We use this to make the name of the string fit within a certain length.
         
         /* solution with substring
          
@@ -42,9 +42,10 @@ class Location {
         if latitude < -90.0 || latitude > 90.0 {return false}
         if longitude <= -180.0 || longitude > 180.0 {return false}
         return true
+        //Checks to make sure that the inputs are valid someone could not have a longitude of anything other than -90...90 and same with longitude -180...180.
     }
     
-    func triviumWithMostLikes() -> Trivium? {
+    func triviumWithMostLikes() -> Trivium? { //Uses this to return the most popular piece of trivia.
         if trivia.count == 0 {return nil}
         var triviumWithMostLikes = trivia[0]
         for currentTrivium in trivia {
